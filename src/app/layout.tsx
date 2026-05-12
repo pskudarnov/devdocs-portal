@@ -14,7 +14,7 @@ const jetbrainsMono = JetBrains_Mono({
   variable: "--font-mono",
 });
 
-const siteUrl = "http://64.188.63.171:3240";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://devdocs.pavel-skudarnov.ru";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
