@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DevDocs - Home</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700&amp;family=JetBrains+Mono:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed": "#e9ddff",
+                        "primary-fixed-dim": "#adc6ff",
+                        "primary": "#adc6ff",
+                        "on-primary-fixed-variant": "#004395",
+                        "tertiary-fixed": "#acedff",
+                        "on-surface": "#d4e4fa",
+                        "on-surface-variant": "#c2c6d6",
+                        "outline-variant": "#424754",
+                        "on-secondary": "#3c0091",
+                        "tertiary": "#4cd7f6",
+                        "on-secondary-fixed": "#23005c",
+                        "on-background": "#d4e4fa",
+                        "on-tertiary-container": "#002f38",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-low": "#0d1c2d",
+                        "on-primary-fixed": "#001a42",
+                        "inverse-on-surface": "#233143",
+                        "on-tertiary-fixed": "#001f26",
+                        "error-container": "#93000a",
+                        "inverse-surface": "#d4e4fa",
+                        "surface-container-highest": "#273647",
+                        "secondary-fixed-dim": "#d0bcff",
+                        "inverse-primary": "#005ac2",
+                        "tertiary-container": "#009eb9",
+                        "surface-dim": "#051424",
+                        "on-error": "#690005",
+                        "background": "#051424",
+                        "surface-container-lowest": "#010f1f",
+                        "secondary-container": "#571bc1",
+                        "primary-container": "#4d8eff",
+                        "on-secondary-container": "#c4abff",
+                        "tertiary-fixed-dim": "#4cd7f6",
+                        "on-tertiary-fixed-variant": "#004e5c",
+                        "surface-container": "#122131",
+                        "surface-tint": "#adc6ff",
+                        "surface-bright": "#2c3a4c",
+                        "surface-variant": "#273647",
+                        "surface": "#051424",
+                        "on-secondary-fixed-variant": "#5516be",
+                        "outline": "#8c909f",
+                        "error": "#ffb4ab",
+                        "primary-fixed": "#d8e2ff",
+                        "on-primary-container": "#00285d",
+                        "on-primary": "#002e6a",
+                        "on-tertiary": "#003640",
+                        "secondary": "#d0bcff",
+                        "surface-container-high": "#1c2b3c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "4rem",
+                        "gutter": "1.5rem",
+                        "lg": "2rem",
+                        "md": "1.5rem",
+                        "sm": "1rem",
+                        "unit": "4px",
+                        "container-max": "1280px",
+                        "xs": "0.5rem"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Geist"],
+                        "body-sm": ["Geist"],
+                        "headline-md": ["Geist"],
+                        "body-base": ["Geist"],
+                        "label-caps": ["Geist"],
+                        "display-xl": ["Geist"],
+                        "code-snippet": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-base": ["16px", { "lineHeight": "26px", "fontWeight": "400" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "display-xl": ["64px", { "lineHeight": "72px", "letterSpacing": "-0.04em", "fontWeight": "700" }],
+                        "code-snippet": ["14px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bg-gradient-radial {
+            background-image: radial-gradient(var(--tw-gradient-stops));
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-base antialiased selection:bg-primary-container selection:text-on-primary-container min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="bg-surface/80 dark:bg-surface/80 backdrop-blur-xl docked full-width top-0 sticky border-b border-outline-variant/20 shadow-sm z-50">
+<div class="flex justify-between items-center px-gutter py-4 w-full max-w-container-max mx-auto">
+<div class="flex items-center gap-sm">
+<span class="font-headline-md text-headline-md font-bold text-on-surface dark:text-on-surface">DevDocs</span>
+</div>
+<nav class="hidden md:flex items-center gap-md">
+<a class="text-primary dark:text-primary-fixed-dim font-semibold border-b-2 border-primary font-body-base text-body-base hover:text-primary dark:hover:text-primary-fixed-dim transition-colors pb-1" href="#">Home</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant font-body-base text-body-base hover:text-primary dark:hover:text-primary-fixed-dim transition-colors pb-1" href="#">Docs</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant font-body-base text-body-base hover:text-primary dark:hover:text-primary-fixed-dim transition-colors pb-1" href="#">Changelog</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant font-body-base text-body-base hover:text-primary dark:hover:text-primary-fixed-dim transition-colors pb-1" href="#">GitHub</a>
+</nav>
+<div class="flex items-center gap-sm">
+<div class="flex gap-2">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-2 rounded-full hover:bg-surface-variant/50">
+<span class="material-symbols-outlined" data-icon="dark_mode">dark_mode</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors p-2 rounded-full hover:bg-surface-variant/50">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</button>
+</div>
+<a class="hidden md:inline-flex items-center justify-center px-4 py-2 text-sm font-semibold text-on-surface bg-surface-container-highest border border-outline-variant/30 rounded-lg hover:border-primary/50 hover:bg-surface-variant transition-all" href="#">
+                    Sign In
+                </a>
+</div>
+</div>
+</header>
+<main class="flex-1 flex flex-col items-center w-full relative overflow-hidden">
+<!-- Ambient Glow Background -->
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-primary/10 blur-[120px] rounded-full pointer-events-none -z-10"></div>
+<!-- Hero Section -->
+<section class="w-full max-w-container-max mx-auto px-gutter pt-24 pb-16 md:pt-32 md:pb-24 grid lg:grid-cols-2 gap-xl items-center">
+<div class="flex flex-col gap-lg z-10">
+<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-primary/20 bg-primary/5 w-fit">
+<span class="flex h-2 w-2 rounded-full bg-primary shadow-[0_0_8px_rgba(173,198,255,0.8)]"></span>
+<span class="font-label-caps text-label-caps text-primary tracking-wider uppercase">v2.4 Released</span>
+</div>
+<h1 class="font-display-xl text-display-xl text-on-surface">
+                    Documentation that feels <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-tertiary">fast, clear,</span> and built for developers.
+                </h1>
+<p class="font-body-base text-body-base text-on-surface-variant max-w-xl text-lg">
+                    DevDocs helps teams create beautiful, searchable, versioned documentation with a modern developer experience and production-ready interface.
+                </p>
+<div class="flex flex-wrap gap-4 pt-4">
+<a class="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-primary-container text-on-primary-container font-semibold hover:bg-primary transition-colors shadow-[0_0_20px_rgba(77,142,255,0.2)] hover:shadow-[0_0_25px_rgba(77,142,255,0.4)] border border-primary/50 shadow-inner" href="#">
+                        Explore Docs
+                    </a>
+<a class="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-surface-container border border-outline-variant/30 text-on-surface font-semibold hover:border-primary/50 hover:bg-surface-container-high transition-all" href="#">
+                        View GitHub
+                        <span class="material-symbols-outlined ml-2 text-sm" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+<div class="flex items-center gap-6 mt-8 pt-8 border-t border-outline-variant/20">
+<span class="text-sm text-on-surface-variant">Trusted by</span>
+<div class="flex gap-4 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+<span class="font-headline-md font-bold text-on-surface tracking-tighter">Vercel</span>
+<span class="font-headline-md font-bold text-on-surface tracking-tighter">Stripe</span>
+<span class="font-headline-md font-bold text-on-surface tracking-tighter">Linear</span>
+</div>
+</div>
+</div>
+<!-- Hero Image / Abstract Visual -->
+<div class="relative w-full aspect-square md:aspect-[4/3] rounded-xl border border-outline-variant/20 bg-surface-container overflow-hidden shadow-2xl z-10 group">
+<div class="absolute inset-0 bg-gradient-to-br from-surface-container-high to-surface-container-lowest opacity-80"></div>
+<!-- Mock Sidebar -->
+<div class="absolute top-0 left-0 bottom-0 w-48 border-r border-outline-variant/20 bg-surface/50 backdrop-blur-md p-4 flex flex-col gap-2">
+<div class="h-4 w-24 bg-surface-bright rounded mb-4"></div>
+<div class="h-3 w-32 bg-surface-variant rounded"></div>
+<div class="h-3 w-28 bg-surface-variant rounded"></div>
+<div class="h-3 w-20 bg-surface-variant rounded"></div>
+</div>
+<!-- Mock Code Block -->
+<div class="absolute top-8 left-56 right-8 bottom-8 rounded-lg border border-outline-variant/30 bg-[#0d1117] overflow-hidden shadow-xl transform transition-transform group-hover:scale-[1.02] group-hover:-translate-y-1 duration-500">
+<div class="flex items-center px-4 py-2 border-b border-outline-variant/20 bg-[#161b22]">
+<div class="flex gap-1.5">
+<div class="w-3 h-3 rounded-full bg-red-500/20 border border-red-500/50"></div>
+<div class="w-3 h-3 rounded-full bg-yellow-500/20 border border-yellow-500/50"></div>
+<div class="w-3 h-3 rounded-full bg-green-500/20 border border-green-500/50"></div>
+</div>
+<span class="ml-4 text-xs font-code-snippet text-outline">config.ts</span>
+</div>
+<div class="p-4 font-code-snippet text-sm text-on-surface-variant whitespace-pre">
+<span class="text-[#ff7b72]">import</span> { defineConfig } <span class="text-[#ff7b72]">from</span> <span class="text-[#a5d6ff]">'@devdocs/core'</span>;
+
+<span class="text-[#ff7b72]">export default</span> defineConfig({
+  <span class="text-[#79c0ff]">theme</span>: <span class="text-[#a5d6ff]">'dark'</span>,
+  <span class="text-[#79c0ff]">features</span>: {
+    search: <span class="text-[#79c0ff]">true</span>,
+    versioning: <span class="text-[#79c0ff]">true</span>
+  }
+});
+                    </div>
+</div>
+<!-- Command Palette Mock -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 rounded-lg border border-primary/30 bg-surface/80 backdrop-blur-xl shadow-[0_0_40px_rgba(77,142,255,0.15)] flex flex-col overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+<div class="flex items-center gap-2 px-4 py-3 border-b border-outline-variant/20">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="search">search</span>
+<span class="text-sm text-on-surface-variant font-body-sm">Search docs...</span>
+<span class="ml-auto text-xs border border-outline-variant/30 rounded px-1.5 py-0.5 text-outline">⌘K</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Features Grid Section -->
+<section class="w-full max-w-container-max mx-auto px-gutter py-24 relative">
+<div class="text-center mb-16">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">Portal features</h2>
+<p class="font-body-base text-body-base text-on-surface-variant max-w-2xl mx-auto">Everything you need to build top-tier documentation portals, out of the box.</p>
+</div>
+<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Feature Card 1 -->
+<div class="p-6 rounded-xl bg-surface-container-low border border-outline-variant/20 hover:border-primary/50 transition-colors group relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center border border-outline-variant/20 mb-4 group-hover:bg-primary-container/20 group-hover:text-primary transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="bolt">bolt</span>
+</div>
+<h3 class="font-headline-md text-lg text-on-surface mb-2 relative z-10">Instant Search</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant relative z-10">Lightning fast Algolia-powered search across all your documentation versions.</p>
+</div>
+<!-- Feature Card 2 -->
+<div class="p-6 rounded-xl bg-surface-container-low border border-outline-variant/20 hover:border-primary/50 transition-colors group relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-tertiary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center border border-outline-variant/20 mb-4 group-hover:bg-tertiary-container/20 group-hover:text-tertiary transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="markdown">markdown</span>
+</div>
+<h3 class="font-headline-md text-lg text-on-surface mb-2 relative z-10">MDX Support</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant relative z-10">Embed React components directly in your markdown for interactive documentation.</p>
+</div>
+<!-- Feature Card 3 -->
+<div class="p-6 rounded-xl bg-surface-container-low border border-outline-variant/20 hover:border-primary/50 transition-colors group relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-secondary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center border border-outline-variant/20 mb-4 group-hover:bg-secondary-container/20 group-hover:text-secondary transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="api">api</span>
+</div>
+<h3 class="font-headline-md text-lg text-on-surface mb-2 relative z-10">API References</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant relative z-10">Auto-generate beautiful API references from OpenAPI specs.</p>
+</div>
+<!-- Feature Card 4 -->
+<div class="p-6 rounded-xl bg-surface-container-low border border-outline-variant/20 hover:border-primary/50 transition-colors group relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center border border-outline-variant/20 mb-4 group-hover:bg-primary-container/20 group-hover:text-primary transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+</div>
+<h3 class="font-headline-md text-lg text-on-surface mb-2 relative z-10">Versioned Docs</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant relative z-10">Keep old documentation available while working on the next major release.</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full mt-xl border-t border-outline-variant/20 bg-surface-container-highest dark:bg-surface-container-highest z-10">
+<div class="flex flex-col md:flex-row justify-between items-center px-gutter py-lg w-full max-w-container-max mx-auto font-body-sm text-body-sm">
+<div class="font-headline-md text-on-surface font-semibold mb-4 md:mb-0">
+                DevDocs
+            </div>
+<div class="flex gap-6 mb-4 md:mb-0">
+<a class="text-on-surface-variant hover:text-primary transition-colors scale-105 transition-transform" href="#">Documentation</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors scale-105 transition-transform" href="#">API Status</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors scale-105 transition-transform" href="#">Twitter</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors scale-105 transition-transform" href="#">Contact</a>
+</div>
+<div class="text-on-surface-variant text-xs">
+                © 2024 DevDocs — Built for Developers
+            </div>
+</div>
+</footer>
+</body></html>

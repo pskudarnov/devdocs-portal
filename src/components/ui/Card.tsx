@@ -1,7 +1,9 @@
 import type { ReactNode } from "react";
 
-export function Card({ children }: { children: ReactNode }) {
+export function Card({ children, className }: { children: ReactNode; className?: string }) {
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">{children}</div>
+    <div className={`rounded-2xl border border-outline-variant/20 bg-surface-container p-6 shadow-xl transition-all hover:border-primary/30 ${className ?? ""}`}>
+      {children}
+    </div>
   );
 }
