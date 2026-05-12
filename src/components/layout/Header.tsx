@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, Code2, Search, Moon } from "lucide-react";
+import { Menu, X, Code2 } from "lucide-react";
 import { useState } from "react";
 import { clsx } from "clsx";
 
@@ -38,6 +38,7 @@ export function Header() {
               {link.label}
             </Link>
           ))}
+
           <a
             href="https://github.com/pskudarnov/devdocs-portal"
             target="_blank"
@@ -50,15 +51,6 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <div className="hidden items-center gap-1 md:flex">
-            <button className="rounded-full p-2 text-on-surface-variant transition-colors hover:bg-surface-variant/50 hover:text-primary">
-              <Search className="h-5 w-5" />
-            </button>
-            <button className="rounded-full p-2 text-on-surface-variant transition-colors hover:bg-surface-variant/50 hover:text-primary">
-              <Moon className="h-5 w-5" />
-            </button>
-          </div>
-          
           <Link
             href="/docs"
             className="hidden items-center justify-center rounded-lg border border-outline-variant/30 bg-surface-container-highest px-4 py-2 text-sm font-semibold text-on-surface transition-all hover:border-primary/50 hover:bg-surface-variant md:inline-flex"
@@ -77,7 +69,6 @@ export function Header() {
         </div>
       </div>
 
-      {/* Mobile Navigation */}
       {open ? (
         <nav className="absolute inset-x-0 top-full border-b border-outline-variant/20 bg-surface p-6 shadow-2xl md:hidden" aria-label="Mobile navigation">
           <div className="flex flex-col gap-4 text-base font-medium">
@@ -94,24 +85,17 @@ export function Header() {
                 {link.label}
               </Link>
             ))}
+
             <a
               href="https://github.com/pskudarnov/devdocs-portal"
               target="_blank"
               rel="noreferrer"
-              className="flex items-center gap-2 text-on-surface-variant transition-colors hover:text-primary"
+              className="flex items-center gap-2 border-t border-outline-variant/20 pt-4 text-on-surface-variant transition-colors hover:text-primary"
               onClick={() => setOpen(false)}
             >
               <Code2 className="h-5 w-5" />
               GitHub
             </a>
-            <div className="mt-4 flex flex-col gap-3 pt-4 border-t border-outline-variant/20">
-               <button className="flex items-center gap-2 text-on-surface-variant">
-                  <Search className="h-5 w-5" /> Search Documentation
-               </button>
-               <button className="flex items-center gap-2 text-on-surface-variant">
-                  <Moon className="h-5 w-5" /> Toggle Theme
-               </button>
-            </div>
           </div>
         </nav>
       ) : null}
