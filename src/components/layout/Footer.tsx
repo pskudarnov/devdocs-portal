@@ -1,5 +1,25 @@
 import Link from "next/link";
 import { Code2, X, Mail } from "lucide-react";
+import { siteConfig } from "@/config/site";
+
+const platformLinks = [
+  { href: "/docs", label: "Documentation" },
+  { href: "/changelog", label: "Changelog" },
+  { href: "/docs/api-client-setup", label: "API Reference" },
+  { href: "/docs/ui-components", label: "Components" },
+] as const;
+
+const resourceLinks = [
+  { href: "/docs/quick-start", label: "Quick Start" },
+  { href: "/docs/routing-basics", label: "Guides" },
+  { href: "/docs/accessibility-checklist", label: "Accessibility" },
+  { href: "/docs/deployment-checklist", label: "Deployment" },
+] as const;
+
+const legalLinks = [
+  { href: "/docs/accessibility-checklist", label: "Accessibility" },
+  { href: "/docs/deployment-checklist", label: "Release checklist" },
+] as const;
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -7,7 +27,7 @@ export function Footer() {
   return (
     <footer className="border-t border-outline-variant/20 bg-surface-container-low py-16">
       <div className="mx-auto max-w-container-max px-gutter">
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4 mb-12">
+        <div className="mb-12 grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           <div className="flex flex-col gap-4">
             <Link href="/" className="text-xl font-bold tracking-tight text-on-surface">
               DevDocs<span className="text-primary">.</span>
@@ -16,49 +36,89 @@ export function Footer() {
               The precision-engineered documentation portal for high-performance development teams.
             </p>
           </div>
-          
+
           <div>
-            <h4 className="font-bold text-on-surface mb-6 uppercase text-xs tracking-widest">Platform</h4>
+            <h2 className="mb-6 text-xs font-bold uppercase tracking-widest text-on-surface">
+              Platform
+            </h2>
             <ul className="flex flex-col gap-3 text-sm text-on-surface-variant">
-              <li><Link href="/docs" className="hover:text-primary transition-colors">Documentation</Link></li>
-              <li><Link href="/changelog" className="hover:text-primary transition-colors">Changelog</Link></li>
-              <li><Link href="#" className="hover:text-primary transition-colors">API Reference</Link></li>
-              <li><Link href="#" className="hover:text-primary transition-colors">Components</Link></li>
+              {platformLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="rounded-md transition-colors hover:text-primary"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
           <div>
-            <h4 className="font-bold text-on-surface mb-6 uppercase text-xs tracking-widest">Resources</h4>
+            <h2 className="mb-6 text-xs font-bold uppercase tracking-widest text-on-surface">
+              Resources
+            </h2>
             <ul className="flex flex-col gap-3 text-sm text-on-surface-variant">
-              <li><Link href="#" className="hover:text-primary transition-colors">Community</Link></li>
-              <li><Link href="#" className="hover:text-primary transition-colors">Showcase</Link></li>
-              <li><Link href="#" className="hover:text-primary transition-colors">Guides</Link></li>
-              <li><Link href="#" className="hover:text-primary transition-colors">Support</Link></li>
+              {resourceLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="rounded-md transition-colors hover:text-primary"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
           <div>
-            <h4 className="font-bold text-on-surface mb-6 uppercase text-xs tracking-widest">Connect</h4>
+            <h2 className="mb-6 text-xs font-bold uppercase tracking-widest text-on-surface">
+              Connect
+            </h2>
             <div className="flex gap-4">
-              <a href="#" className="p-2 rounded-lg bg-surface-bright text-on-surface-variant hover:text-primary transition-all">
+              <a
+                href={siteConfig.repositoryUrl}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Open GitHub repository"
+                className="rounded-lg bg-surface-bright p-2 text-on-surface-variant transition-colors hover:text-primary"
+              >
                 <Code2 className="h-5 w-5" />
               </a>
-              <a href="#" className="p-2 rounded-lg bg-surface-bright text-on-surface-variant hover:text-primary transition-all">
+              <a
+                href="https://x.com"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Open X"
+                className="rounded-lg bg-surface-bright p-2 text-on-surface-variant transition-colors hover:text-primary"
+              >
                 <X className="h-5 w-5" />
               </a>
-              <a href="#" className="p-2 rounded-lg bg-surface-bright text-on-surface-variant hover:text-primary transition-all">
+              <a
+                href={siteConfig.email}
+                aria-label="Email DevDocs"
+                className="rounded-lg bg-surface-bright p-2 text-on-surface-variant transition-colors hover:text-primary"
+              >
                 <Mail className="h-5 w-5" />
               </a>
             </div>
           </div>
         </div>
 
-        <div className="pt-8 border-t border-outline-variant/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-on-surface-variant">
+        <div className="flex flex-col items-center justify-between gap-4 border-t border-outline-variant/10 pt-8 text-xs text-on-surface-variant md:flex-row">
           <p>© {currentYear} DevDocs Premium. All rights reserved.</p>
-          <div className="flex gap-6">
-            <Link href="#" className="hover:text-on-surface transition-colors">Privacy Policy</Link>
-            <Link href="#" className="hover:text-on-surface transition-colors">Terms of Service</Link>
-            <Link href="#" className="hover:text-on-surface transition-colors">Cookie Settings</Link>
+          <div className="flex flex-wrap justify-center gap-6">
+            {legalLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="rounded-md transition-colors hover:text-on-surface"
+              >
+                {link.label}
+              </Link>
+            ))}
           </div>
         </div>
       </div>

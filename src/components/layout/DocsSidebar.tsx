@@ -1,64 +1,87 @@
+"use client";
+
 import Link from "next/link";
-import { docs } from "@/data/docs";
+import { docCategories, docs, type DocCategory } from "@/data/docs";
 import { clsx } from "clsx";
 import { usePathname } from "next/navigation";
-import { Book, ChevronRight, Zap, Code, Shield, Globe } from "lucide-react";
+import { Book, ChevronRight, Zap, Code, Rocket, Layers, Shield } from "lucide-react";
+
+const categoryIcons = {
+  "Getting Started": Zap,
+  API: Code,
+  Components: Layers,
+  Guides: Book,
+  Deployment: Rocket,
+} satisfies Record<DocCategory, typeof Book>;
 
 export function DocsSidebar() {
   const pathname = usePathname();
-
-  // Group docs by category (simulated for now)
-  const categories = [
-    { label: "Getting Started", icon: Zap, items: docs.slice(0, 3) },
-    { label: "Core Concepts", icon: Book, items: docs.slice(3, 6) },
-    { label: "Advanced API", icon: Code, items: docs.slice(6, 9) },
-  ];
+  const categories = docCategories
+    .map((category) => ({
+      label: category,
+      icon: categoryIcons[category],
+      items: docs.filter((doc) => doc.category === category),
+    }))
+    .filter((category) => category.items.length > 0);
 
   return (
-    <aside className="hidden w-72 shrink-0 lg:block border-r border-outline-variant/10 pr-6" aria-label="Docs sidebar">
-      <div className="sticky top-28 flex flex-col gap-8 animate-fade-in-up opacity-0">
-        {categories.map((cat) => (
-          <div key={cat.label} className="flex flex-col gap-2">
-            <h4 className="flex items-center gap-2 px-2 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-2">
-              <cat.icon className="h-3 w-3" />
-              {cat.label}
-            </h4>
+    <aside
+      className="hidden w-72 shrink-0 border-r border-outline-variant/15 pr-6 lg:block"
+      aria-label="Docs sidebar"
+    >
+      <div className="sticky top-24 flex flex-col gap-7">
+        {categories.map((category) => (
+          <div key={category.label} className="flex flex-col gap-2">
+            <h2 className="mb-1 flex items-center gap-2 px-2 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">
+              <category.icon className="h-3 w-3" />
+              {category.label}
+            </h2>
             <nav className="flex flex-col gap-0.5">
-              {cat.items.map((doc) => {
+              {category.items.map((doc) => {
                 const isActive = pathname === `/docs/${doc.slug}`;
                 return (
                   <Link
                     key={doc.id}
                     href={`/docs/${doc.slug}`}
+                    aria-current={isActive ? "page" : undefined}
                     className={clsx(
-                      "group flex items-center justify-between rounded-lg px-3 py-2 text-sm font-medium transition-all",
-                      isActive 
-                        ? "bg-primary/10 text-primary border-l-2 border-primary" 
-                        : "text-on-surface-variant hover:bg-surface-variant/50 hover:text-on-surface"
+                      "group flex items-center justify-between rounded-lg border-l-2 px-3 py-2 text-sm font-medium transition-colors",
+                      isActive
+                        ? "border-primary bg-primary/10 text-primary"
+                        : "border-transparent text-on-surface-variant hover:bg-surface-variant/50 hover:text-on-surface",
                     )}
                   >
                     <span className="truncate">{doc.title}</span>
-                    <ChevronRight className={clsx(
-                      "h-3.5 w-3.5 transition-transform",
-                      isActive ? "opacity-100" : "opacity-0 group-hover:opacity-40 group-hover:translate-x-0.5"
-                    )} />
+                    <ChevronRight
+                      className={clsx(
+                        "h-3.5 w-3.5 transition-transform",
+                        isActive
+                          ? "opacity-100"
+                          : "opacity-0 group-hover:translate-x-0.5 group-hover:opacity-40",
+                      )}
+                    />
                   </Link>
                 );
               })}
             </nav>
           </div>
         ))}
-        
-        {/* Additional sections */}
-        <div className="mt-4 pt-8 border-t border-outline-variant/10">
-           <Link href="#" className="flex items-center gap-3 px-3 py-2 text-sm text-on-surface-variant hover:text-primary transition-colors">
-              <Shield className="h-4 w-4" />
-              Security Policy
-           </Link>
-           <Link href="#" className="flex items-center gap-3 px-3 py-2 text-sm text-on-surface-variant hover:text-primary transition-colors">
-              <Globe className="h-4 w-4" />
-              Release Notes
-           </Link>
+
+        <div className="mt-2 border-t border-outline-variant/15 pt-5">
+          <Link
+            href="/docs/accessibility-checklist"
+            className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-on-surface-variant transition-colors hover:bg-surface-variant/50 hover:text-primary"
+          >
+            <Shield className="h-4 w-4" />
+            Accessibility checklist
+          </Link>
+          <Link
+            href="/changelog"
+            className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-on-surface-variant transition-colors hover:bg-surface-variant/50 hover:text-primary"
+          >
+            <Rocket className="h-4 w-4" />
+            Release notes
+          </Link>
         </div>
       </div>
     </aside>

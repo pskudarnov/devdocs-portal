@@ -27,33 +27,34 @@ const features = [
   },
 ];
 
+const featureDelays = ["delay-100", "delay-200", "delay-300", "delay-500"] as const;
+
 export function FeatureGrid() {
   return (
-    <section className="py-24 bg-surface-container-low/50 border-y border-outline-variant/10">
+    <section className="border-y border-outline-variant/10 bg-surface-container-low/50 py-20 md:py-24">
       <div className="mx-auto max-w-container-max px-gutter">
-        <div className="flex flex-col gap-4 mb-16 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-on-surface">Portal features</h2>
+        <div className="mb-14 flex flex-col gap-4 text-center md:mb-16">
+          <h2 className="text-3xl font-bold text-on-surface md:text-4xl">Portal features</h2>
           <p className="text-on-surface-variant max-w-2xl mx-auto">
             Everything you need to build top-tier documentation portals, out of the box.
           </p>
         </div>
-        
+
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           {features.map((feature, idx) => (
-            <div 
+            <div
               key={feature.title}
-              className={`group relative p-8 rounded-2xl border border-outline-variant/20 bg-surface-container hover:border-primary/50 transition-all duration-300 hover:-translate-y-1 animate-fade-in-up opacity-0 delay-${(idx + 1) * 100}`}
+              className={`group relative rounded-lg border border-outline-variant/20 bg-surface-container p-6 transition-colors hover:border-primary/50 md:p-8 animate-fade-in-up ${featureDelays[idx]}`}
             >
-              <div className={`mb-6 inline-flex p-3 rounded-xl bg-surface-bright ${feature.color}`}>
+              <div className={`mb-6 inline-flex rounded-lg bg-surface-bright p-3 ${feature.color}`}>
                 <feature.icon className="h-6 w-6" />
               </div>
-              <h3 className="text-xl font-bold text-on-surface mb-3">{feature.title}</h3>
+              <h3 className="mb-3 text-xl font-bold text-on-surface">{feature.title}</h3>
               <p className="text-on-surface-variant text-sm leading-relaxed">
                 {feature.description}
               </p>
-              
-              {/* Subtle hover glow */}
-              <div className="absolute inset-0 rounded-2xl bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+
+              <div className="pointer-events-none absolute inset-0 rounded-lg bg-primary/5 transition-opacity group-hover:opacity-100" />
             </div>
           ))}
         </div>

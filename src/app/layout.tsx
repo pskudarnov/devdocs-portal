@@ -3,6 +3,7 @@ import { Geist, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { siteConfig } from "@/config/site";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -14,18 +15,33 @@ const jetbrainsMono = JetBrains_Mono({
   variable: "--font-mono",
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://devdocs.pavel-skudarnov.ru";
+const themeInitScript = `
+(() => {
+  try {
+    const storedTheme = window.localStorage.getItem("devdocs-theme");
+    const theme =
+      storedTheme === "light" || storedTheme === "dark"
+        ? storedTheme
+        : window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light";
+
+    document.documentElement.dataset.theme = theme;
+    document.documentElement.style.colorScheme = theme;
+  } catch {
+    document.documentElement.dataset.theme = "dark";
+  }
+})();
+`;
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(siteConfig.url),
   title: "DevDocs Premium — Documentation Portal",
-  description:
-    "A premium developer documentation portal with precision engineering and cinematic design.",
+  description: siteConfig.description,
   openGraph: {
-    title: "DevDocs Premium",
-    description:
-      "A premium developer documentation portal with precision engineering and cinematic design.",
-    url: siteUrl,
+    title: siteConfig.title,
+    description: siteConfig.description,
+    url: siteConfig.url,
     siteName: "DevDocs",
     images: [{ url: "/og-image.svg", width: 1200, height: 630 }],
     type: "website",
@@ -43,10 +59,19 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${geist.variable} ${jetbrainsMono.variable}`}>
+    <html
+      lang="en"
+      className={`${geist.variable} ${jetbrainsMono.variable}`}
+      suppressHydrationWarning
+    >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body className="flex min-h-screen flex-col bg-background text-on-background font-geist selection:bg-primary-container selection:text-on-primary-container">
         <Header />
-        <main className="flex-1 flex flex-col">{children}</main>
+        <main id="main-content" className="flex flex-1 flex-col">
+          {children}
+        </main>
         <Footer />
       </body>
     </html>
