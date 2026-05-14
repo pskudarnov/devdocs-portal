@@ -11,5 +11,6 @@ export const siteConfig = {
 export const navigationLinks = [
   { href: "/", label: "Home" },
   { href: "/docs", label: "Docs" },
+  { href: "/architecture", label: "Architecture" },
   { href: "/changelog", label: "Changelog" },
 ] as const;

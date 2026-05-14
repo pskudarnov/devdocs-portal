@@ -39,8 +39,8 @@ export function DocsSearch(props: Props) {
           id="search-input"
           value={props.query}
           onChange={(e) => props.setQuery(e.target.value)}
-          placeholder="Keyword search..."
-          className="w-full rounded-lg border border-outline-variant/35 bg-surface-container px-4 py-2.5 text-sm text-on-surface transition-colors placeholder:text-on-surface-variant/50 focus:border-primary/60"
+          aria-label="Search docs by keyword"
+          className="w-full rounded-lg border border-outline-variant/35 bg-surface-container px-4 py-2.5 text-sm text-on-surface transition-colors focus:border-primary/60"
         />
       </div>
 

@@ -5,7 +5,9 @@ export type DocsSort = "popular" | "updated" | "az";
 export function filterDocs(query: string, category: string, difficulty: string, sort: DocsSort) {
   let list = docs.filter((d) => {
     const text =
-      `${d.title} ${d.description} ${d.category} ${d.sections.map((s) => s.body).join(" ")}`.toLowerCase();
+      `${d.title} ${d.description} ${d.summary ?? ""} ${d.tags.join(" ")} ${d.category} ${d.sections
+        .map((s) => s.body)
+        .join(" ")}`.toLowerCase();
     return text.includes(query.toLowerCase());
   });
 

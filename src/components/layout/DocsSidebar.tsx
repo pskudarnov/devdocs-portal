@@ -4,7 +4,7 @@ import Link from "next/link";
 import { docCategories, docs, type DocCategory } from "@/data/docs";
 import { clsx } from "clsx";
 import { usePathname } from "next/navigation";
-import { Book, ChevronRight, Zap, Code, Rocket, Layers, Shield } from "lucide-react";
+import { Book, ChevronRight, Zap, Code, Rocket, Layers } from "lucide-react";
 
 const categoryIcons = {
   "Getting Started": Zap,
@@ -16,72 +16,90 @@ const categoryIcons = {
 
 export function DocsSidebar() {
   const pathname = usePathname();
-  const categories = docCategories
-    .map((category) => ({
-      label: category,
-      icon: categoryIcons[category],
-      items: docs.filter((doc) => doc.category === category),
-    }))
-    .filter((category) => category.items.length > 0);
+  const categories = docCategories.map((category) => ({
+    label: category,
+    icon: categoryIcons[category],
+    count: docs.filter((doc) => doc.category === category).length,
+  }));
+  const popular = [...docs].sort((a, b) => b.popularity - a.popularity).slice(0, 6);
 
   return (
     <aside
       className="hidden w-72 shrink-0 border-r border-outline-variant/15 pr-6 lg:block"
       aria-label="Docs sidebar"
     >
-      <div className="sticky top-24 flex flex-col gap-7">
-        {categories.map((category) => (
-          <div key={category.label} className="flex flex-col gap-2">
-            <h2 className="mb-1 flex items-center gap-2 px-2 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">
-              <category.icon className="h-3 w-3" />
-              {category.label}
-            </h2>
-            <nav className="flex flex-col gap-0.5">
-              {category.items.map((doc) => {
-                const isActive = pathname === `/docs/${doc.slug}`;
-                return (
-                  <Link
-                    key={doc.id}
-                    href={`/docs/${doc.slug}`}
-                    aria-current={isActive ? "page" : undefined}
-                    className={clsx(
-                      "group flex items-center justify-between rounded-lg border-l-2 px-3 py-2 text-sm font-medium transition-colors",
-                      isActive
-                        ? "border-primary bg-primary/10 text-primary"
-                        : "border-transparent text-on-surface-variant hover:bg-surface-variant/50 hover:text-on-surface",
-                    )}
-                  >
-                    <span className="truncate">{doc.title}</span>
-                    <ChevronRight
-                      className={clsx(
-                        "h-3.5 w-3.5 transition-transform",
-                        isActive
-                          ? "opacity-100"
-                          : "opacity-0 group-hover:translate-x-0.5 group-hover:opacity-40",
-                      )}
-                    />
-                  </Link>
-                );
-              })}
-            </nav>
-          </div>
-        ))}
+      <div className="sticky top-24 space-y-6">
+        <div className="rounded-lg border border-outline-variant/20 bg-surface-container p-4">
+          <h2 className="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">
+            Categories
+          </h2>
+          <nav className="mt-3 space-y-1.5">
+            {categories.map((category) => (
+              <Link
+                key={category.label}
+                href="/docs"
+                className="flex items-center justify-between rounded-md px-2 py-1.5 text-sm text-on-surface-variant transition-colors hover:bg-surface-variant/50 hover:text-on-surface"
+              >
+                <span className="inline-flex items-center gap-2">
+                  <category.icon className="h-3.5 w-3.5" />
+                  {category.label}
+                </span>
+                <span>{category.count}</span>
+              </Link>
+            ))}
+          </nav>
+        </div>
 
-        <div className="mt-2 border-t border-outline-variant/15 pt-5">
-          <Link
-            href="/docs/accessibility-checklist"
-            className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-on-surface-variant transition-colors hover:bg-surface-variant/50 hover:text-primary"
-          >
-            <Shield className="h-4 w-4" />
-            Accessibility checklist
-          </Link>
-          <Link
-            href="/changelog"
-            className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-on-surface-variant transition-colors hover:bg-surface-variant/50 hover:text-primary"
-          >
-            <Rocket className="h-4 w-4" />
-            Release notes
-          </Link>
+        <div className="rounded-lg border border-outline-variant/20 bg-surface-container p-4">
+          <h2 className="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">
+            Popular articles
+          </h2>
+          <nav className="mt-3 flex flex-col gap-1">
+            {popular.map((doc) => {
+              const isActive = pathname === `/docs/${doc.slug}`;
+              return (
+                <Link
+                  key={doc.id}
+                  href={`/docs/${doc.slug}`}
+                  className={clsx(
+                    "group flex items-center justify-between rounded-md px-2 py-1.5 text-sm",
+                    isActive
+                      ? "bg-primary/10 text-primary"
+                      : "text-on-surface-variant hover:bg-surface-variant/50 hover:text-on-surface",
+                  )}
+                >
+                  <span className="truncate">{doc.title}</span>
+                  <ChevronRight className="h-3.5 w-3.5 opacity-40" />
+                </Link>
+              );
+            })}
+          </nav>
+        </div>
+
+        <div className="rounded-lg border border-outline-variant/20 bg-surface-container p-4 text-sm text-on-surface-variant">
+          <h2 className="text-[10px] font-bold uppercase tracking-widest">Deployment checklist</h2>
+          <ul className="mt-3 space-y-1.5">
+            <li>
+              <Link href="/docs/production-build" className="hover:text-primary">
+                Production build
+              </Link>
+            </li>
+            <li>
+              <Link href="/docs/pm2-deployment" className="hover:text-primary">
+                PM2 deployment
+              </Link>
+            </li>
+            <li>
+              <Link href="/docs/smoke-testing" className="hover:text-primary">
+                Smoke testing
+              </Link>
+            </li>
+            <li>
+              <Link href="/docs/rollback-strategy" className="hover:text-primary">
+                Rollback strategy
+              </Link>
+            </li>
+          </ul>
         </div>
       </div>
     </aside>

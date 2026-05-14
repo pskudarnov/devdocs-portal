@@ -1,6 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo, useState } from "react";
+import { docs } from "@/data/docs";
 import { DocsGrid } from "@/components/docs/DocsGrid";
 import { DocsSearch } from "@/components/docs/DocsSearch";
 import { DocsSidebar } from "@/components/layout/DocsSidebar";
@@ -16,7 +18,6 @@ export function DocsExplorer() {
     () => filterDocs(query, category, difficulty, sort),
     [query, category, difficulty, sort],
   );
-
   const hasActiveFilters =
     query.trim() !== "" || category !== "all" || difficulty !== "all" || sort !== "popular";
 
@@ -30,8 +31,49 @@ export function DocsExplorer() {
   return (
     <div className="flex flex-col gap-10 lg:flex-row">
       <DocsSidebar />
-
       <div className="min-w-0 flex-1 space-y-8">
+        <div className="grid gap-4 md:grid-cols-3">
+          <div className="rounded-lg border border-outline-variant/20 bg-surface-container p-5 md:col-span-2">
+            <h2 className="text-xl font-bold text-on-surface">New to the project?</h2>
+            <p className="mt-2 text-sm text-on-surface-variant">
+              Start with this recommended path to understand setup, architecture, and release flow
+              without context switching.
+            </p>
+            <div className="mt-3 flex flex-wrap gap-2 text-xs">
+              <Link
+                href="/docs/quick-start"
+                className="rounded-md border border-outline-variant/25 px-2.5 py-1 hover:text-primary"
+              >
+                Quick Start
+              </Link>
+              <Link
+                href="/docs/repository-conventions"
+                className="rounded-md border border-outline-variant/25 px-2.5 py-1 hover:text-primary"
+              >
+                Project Structure
+              </Link>
+              <Link
+                href="/docs/deployment-checklist"
+                className="rounded-md border border-outline-variant/25 px-2.5 py-1 hover:text-primary"
+              >
+                Deployment Checklist
+              </Link>
+            </div>
+          </div>
+          <div className="rounded-lg border border-outline-variant/20 bg-surface-container p-5">
+            <h3 className="text-xs font-bold uppercase tracking-widest text-on-surface-variant">
+              Category overview
+            </h3>
+            <ul className="mt-2 space-y-1.5 text-sm text-on-surface-variant">
+              {["Getting Started", "API", "Components", "Guides", "Deployment"].map((name) => (
+                <li key={name}>
+                  {name}: {docs.filter((d) => d.category === name).length}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
         <div className="surface-panel overflow-hidden rounded-lg p-1">
           <DocsSearch
             query={query}
@@ -53,14 +95,13 @@ export function DocsExplorer() {
               {filtered.length} articles found
             </h2>
           </div>
-
           {filtered.length === 0 ? (
             <div className="surface-panel rounded-lg p-6 text-center">
               <h3 className="text-lg font-semibold text-on-surface">No articles found</h3>
               <p className="mt-2 text-sm text-on-surface-variant">
-                Try adjusting your search or reset filters.
+                Try broadening your query or reset filters, then start from popular guides below.
               </p>
-              <div className="mt-4">
+              <div className="mt-4 flex flex-wrap justify-center gap-2">
                 <button
                   type="button"
                   onClick={resetFilters}
@@ -68,6 +109,15 @@ export function DocsExplorer() {
                 >
                   Reset filters
                 </button>
+                {["quick-start", "search-experience", "pm2-deployment"].map((slug) => (
+                  <Link
+                    key={slug}
+                    href={`/docs/${slug}`}
+                    className="rounded-lg border border-outline-variant/35 px-4 py-2 text-sm"
+                  >
+                    Open {slug}
+                  </Link>
+                ))}
               </div>
             </div>
           ) : (
