@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, Code2 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { clsx } from "clsx";
 import { navigationLinks, siteConfig } from "@/config/site";
 import { ThemeToggle } from "@/components/layout/ThemeToggle";
@@ -11,6 +11,27 @@ import { ThemeToggle } from "@/components/layout/ThemeToggle";
 export function Header() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+
+  useEffect(() => {
+    if (!open) return;
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setOpen(false);
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [open]);
+
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => {
+      setOpen(false);
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, [pathname]);
 
   return (
     <header className="sticky top-0 z-50 border-b border-outline-variant/25 bg-surface/90 backdrop-blur-xl">

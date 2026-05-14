@@ -5,7 +5,7 @@ export const siteConfig = {
     "A premium developer documentation portal with precision engineering and a production-ready interface.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://devdocs.pavel-skudarnov.ru",
   repositoryUrl: "https://github.com/pskudarnov/devdocs-portal",
-  email: "mailto:hello@devdocs.example",
+  email: "mailto:pavel.skudarnov@yandex.ru",
 };
 
 export const navigationLinks = [

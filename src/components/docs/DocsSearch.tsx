@@ -6,6 +6,8 @@ type Props = {
   category: string;
   difficulty: string;
   sort: string;
+  hasActiveFilters: boolean;
+  onReset: () => void;
   setQuery: (v: string) => void;
   setCategory: (v: string) => void;
   setDifficulty: (v: string) => void;
@@ -112,6 +114,18 @@ export function DocsSearch(props: Props) {
           </select>
         </SelectWrapper>
       </div>
+
+      {props.hasActiveFilters ? (
+        <div className="md:col-span-4">
+          <button
+            type="button"
+            onClick={props.onReset}
+            className="rounded-lg border border-outline-variant/35 bg-surface-container px-4 py-2 text-sm font-semibold text-on-surface transition-colors hover:border-primary/50 hover:bg-surface-variant"
+          >
+            Reset filters
+          </button>
+        </div>
+      ) : null}
     </div>
   );
 }

@@ -17,6 +17,16 @@ export function DocsExplorer() {
     [query, category, difficulty, sort],
   );
 
+  const hasActiveFilters =
+    query.trim() !== "" || category !== "all" || difficulty !== "all" || sort !== "popular";
+
+  function resetFilters() {
+    setQuery("");
+    setCategory("all");
+    setDifficulty("all");
+    setSort("popular");
+  }
+
   return (
     <div className="flex flex-col gap-10 lg:flex-row">
       <DocsSidebar />
@@ -28,6 +38,8 @@ export function DocsExplorer() {
             category={category}
             difficulty={difficulty}
             sort={sort}
+            hasActiveFilters={hasActiveFilters}
+            onReset={resetFilters}
             setQuery={setQuery}
             setCategory={setCategory}
             setDifficulty={setDifficulty}
@@ -41,7 +53,26 @@ export function DocsExplorer() {
               {filtered.length} articles found
             </h2>
           </div>
-          <DocsGrid docs={filtered} />
+
+          {filtered.length === 0 ? (
+            <div className="surface-panel rounded-lg p-6 text-center">
+              <h3 className="text-lg font-semibold text-on-surface">No articles found</h3>
+              <p className="mt-2 text-sm text-on-surface-variant">
+                Try adjusting your search or reset filters.
+              </p>
+              <div className="mt-4">
+                <button
+                  type="button"
+                  onClick={resetFilters}
+                  className="rounded-lg border border-outline-variant/35 bg-surface-container px-4 py-2 text-sm font-semibold text-on-surface transition-colors hover:border-primary/50 hover:bg-surface-variant"
+                >
+                  Reset filters
+                </button>
+              </div>
+            </div>
+          ) : (
+            <DocsGrid docs={filtered} />
+          )}
         </section>
       </div>
     </div>
