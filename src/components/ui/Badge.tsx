@@ -1,6 +1,13 @@
-export function Badge({ label }: { label: string }) {
+import { clsx } from "clsx";
+
+export function Badge({ label, className }: { label: string; className?: string }) {
   return (
-    <span className="rounded-full bg-blue-100 px-2.5 py-1 text-xs font-medium text-blue-900">
+    <span
+      className={clsx(
+        "rounded-full border border-primary/20 bg-primary/10 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-primary",
+        className,
+      )}
+    >
       {label}
     </span>
   );

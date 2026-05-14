@@ -5,3 +5,11 @@ export function formatDate(input: string) {
     day: "numeric",
   });
 }
+
+export function slugifyHeading(input: string) {
+  return input
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9\s-]/g, "")
+    .replace(/\s+/g, "-");
+}

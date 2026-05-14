@@ -1,6 +1,20 @@
 export type DocCategory = "Getting Started" | "API" | "Components" | "Guides" | "Deployment";
 export type DocDifficulty = "Beginner" | "Intermediate" | "Advanced";
 
+export const docCategories = [
+  "Getting Started",
+  "API",
+  "Components",
+  "Guides",
+  "Deployment",
+] as const satisfies readonly DocCategory[];
+
+export const docDifficulties = [
+  "Beginner",
+  "Intermediate",
+  "Advanced",
+] as const satisfies readonly DocDifficulty[];
+
 export type DocSection = { heading: string; body: string };
 export type DocCodeExample = { title: string; language: string; code: string };
 

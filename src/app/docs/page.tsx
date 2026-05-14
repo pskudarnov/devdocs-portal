@@ -1,43 +1,20 @@
-"use client";
-
-import { useMemo, useState } from "react";
-import { DocsSearch } from "@/components/docs/DocsSearch";
-import { DocsGrid } from "@/components/docs/DocsGrid";
-import { DocsSidebar } from "@/components/layout/DocsSidebar";
-import { filterDocs } from "@/lib/docs";
+import { DocsExplorer } from "@/components/docs/DocsExplorer";
 
 export default function DocsPage() {
-  const [query, setQuery] = useState("");
-  const [category, setCategory] = useState("all");
-  const [difficulty, setDifficulty] = useState("all");
-  const [sort, setSort] = useState<"popular" | "updated" | "az">("popular");
-
-  const filtered = useMemo(
-    () => filterDocs(query, category, difficulty, sort),
-    [query, category, difficulty, sort],
-  );
-
   return (
-    <section className="py-10">
-      <h1 className="text-3xl font-semibold">Documentation</h1>
-      <p className="mt-2 text-sm text-slate-600">
-        Search, filter and browse developer docs by category and complexity.
-      </p>
-      <div className="mt-6 flex gap-6">
-        <DocsSidebar />
-        <div className="min-w-0 flex-1 space-y-4">
-          <DocsSearch
-            query={query}
-            category={category}
-            difficulty={difficulty}
-            sort={sort}
-            setQuery={setQuery}
-            setCategory={setCategory}
-            setDifficulty={setDifficulty}
-            setSort={(v) => setSort(v as "popular" | "updated" | "az")}
-          />
-          <DocsGrid docs={filtered} />
+    <section className="min-h-screen py-12 md:py-16">
+      <div className="mx-auto max-w-container-max px-gutter">
+        <div className="mb-12">
+          <h1 className="text-4xl font-bold tracking-tight text-on-surface md:text-5xl">
+            Documentation
+          </h1>
+          <p className="mt-4 max-w-2xl text-lg leading-relaxed text-on-surface-variant">
+            Search, filter and browse developer docs by category and complexity. Built for
+            high-performance development teams.
+          </p>
         </div>
+
+        <DocsExplorer />
       </div>
     </section>
   );

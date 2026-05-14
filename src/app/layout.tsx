@@ -1,29 +1,56 @@
 import type { Metadata } from "next";
+import { Geist, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { siteConfig } from "@/config/site";
 
-const siteUrl = "http://64.188.63.171:3240";
+const geist = Geist({
+  subsets: ["latin"],
+  variable: "--font-geist",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+});
+
+const themeInitScript = `
+(() => {
+  try {
+    const storedTheme = window.localStorage.getItem("devdocs-theme");
+    const theme =
+      storedTheme === "light" || storedTheme === "dark"
+        ? storedTheme
+        : window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light";
+
+    document.documentElement.dataset.theme = theme;
+    document.documentElement.style.colorScheme = theme;
+  } catch {
+    document.documentElement.dataset.theme = "dark";
+  }
+})();
+`;
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
-  title: "DevDocs — Developer Documentation Portal Demo",
-  description:
-    "A production-ready Next.js documentation portal demo with searchable docs, article pages, code blocks and responsive navigation built with TypeScript and Tailwind CSS.",
+  metadataBase: new URL(siteConfig.url),
+  title: "DevDocs Premium — Documentation Portal",
+  description: siteConfig.description,
   openGraph: {
-    title: "DevDocs — Developer Documentation Portal Demo",
-    description:
-      "A production-ready Next.js documentation portal demo with searchable docs, article pages, code blocks and responsive navigation built with TypeScript and Tailwind CSS.",
-    url: siteUrl,
+    title: siteConfig.title,
+    description: siteConfig.description,
+    url: siteConfig.url,
     siteName: "DevDocs",
     images: [{ url: "/og-image.svg", width: 1200, height: 630 }],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "DevDocs — Developer Documentation Portal Demo",
+    title: "DevDocs Premium",
     description:
-      "A production-ready Next.js documentation portal demo with searchable docs, article pages, code blocks and responsive navigation built with TypeScript and Tailwind CSS.",
+      "A premium developer documentation portal with precision engineering and cinematic design.",
     images: ["/og-image.svg"],
   },
   robots: { index: true, follow: true },
@@ -32,10 +59,19 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
-      <body>
+    <html
+      lang="en"
+      className={`${geist.variable} ${jetbrainsMono.variable}`}
+      suppressHydrationWarning
+    >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
+      <body className="flex min-h-screen flex-col bg-background text-on-background font-geist selection:bg-primary-container selection:text-on-primary-container">
         <Header />
-        <main className="mx-auto min-h-[calc(100vh-160px)] max-w-6xl px-4">{children}</main>
+        <main id="main-content" className="flex flex-1 flex-col">
+          {children}
+        </main>
         <Footer />
       </body>
     </html>
