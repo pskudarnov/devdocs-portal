@@ -1,82 +1,99 @@
-# DevDocs — Developer Documentation Portal
+# DevDocs Portal
 
-live demo: http://64.188.63.171:3240  
+live demo: https://devdocs.pavel-skudarnov.ru  
 repo: https://github.com/pskudarnov/devdocs-portal
 
-## stack
+## Stack
 
 - Next.js App Router
 - TypeScript
 - Tailwind CSS
-- lucide-react
-- clsx
-- ESLint
-- Prettier
+- Lucide React
+- ESLint + Prettier
 
-## features
+## Pages
 
-- Searchable documentation index
-- Filters by category and difficulty
-- Sorting: popular, recently updated, A-Z
-- Article pages with sections and code blocks
-- Docs sidebar and On This Page navigation
-- Changelog page with typed entries
-- Responsive docs layout
-- SEO metadata + robots + sitemap
+- /
+- /docs
+- /docs/[slug]
+- /architecture
+- /resources
+- /status
+- /changelog
+- /robots.txt
+- /sitemap.xml
 
-## pages
+## Features
 
-- `/`
-- `/docs`
-- `/docs/[slug]`
-- `/changelog`
+- searchable documentation catalog
+- filters by category and difficulty
+- sorting (popular, recently updated, A-Z)
+- article pages with callouts, related docs, and code blocks
+- copyable code examples
+- sidebar navigation
+- On this page navigation
+- changelog
+- architecture/resources/status pages
+- SEO metadata, robots, and sitemap
+- responsive layout
+- dark/light theme
 
-## architecture
+## Project Structure
 
-- `src/data/*`: docs and changelog mock datasets
-- `src/lib/*`: docs filtering/helpers and shared utilities
-- `src/components/*`: layout, landing, docs, and UI primitives
-- `src/app/*`: routes and metadata endpoints
+- src/app/\* — route entries and metadata endpoints
+- src/components/\* — layout, docs, and UI components
+- src/data/\* — docs and changelog datasets
+- src/lib/\* — filtering and utility helpers
+- src/config/\* — shared site configuration
 
-## mock data
-
-- 12 docs entries with category, difficulty, sections, code examples, dates, and popularity
-- changelog entries with type and bullets
-
-## how to run
+## Local Development
 
 ```bash
 npm install
 npm run dev
 ```
 
-## scripts
-
-- `npm run dev`
-- `npm run build`
-- `npm run start`
-- `npm run lint`
-- `npm run typecheck`
-- `npm run format`
-- `npm run format:check`
-
-## deployment notes
-
-- PM2 process: `devdocs-portal`
-- Port: `3240`
-- Start command:
+## Quality Gates
 
 ```bash
-PORT=3240 pm2 start npm --name devdocs-portal -- start
+npm run format:check
+npm run typecheck
+npm run lint
+npm run build
 ```
 
-## what this project demonstrates
+If formatting fails:
 
-- Documentation portal composition
-- Search and filtering UX
-- Article/detail page layout
-- Code block rendering
-- Sidebar navigation
-- SEO-friendly page structure
-- TypeScript data modeling
-- Accessibility basics
+```bash
+npm run format
+npm run format:check
+```
+
+## Deployment
+
+PM2 process: devdocs-portal  
+Port: 3240
+
+Suggested production commands:
+
+```bash
+npm install
+npm run format:check
+npm run typecheck
+npm run lint
+npm run build
+PORT=3240 pm2 restart devdocs-portal --update-env
+```
+
+## Smoke Checks
+
+```bash
+curl -I https://devdocs.pavel-skudarnov.ru/
+curl -I https://devdocs.pavel-skudarnov.ru/docs
+curl -I https://devdocs.pavel-skudarnov.ru/changelog
+curl -I https://devdocs.pavel-skudarnov.ru/architecture
+curl -I https://devdocs.pavel-skudarnov.ru/resources
+curl -I https://devdocs.pavel-skudarnov.ru/status
+curl -I https://devdocs.pavel-skudarnov.ru/sitemap.xml
+curl -I https://devdocs.pavel-skudarnov.ru/robots.txt
+```

@@ -13,15 +13,15 @@ export const changelog: ChangelogEntry[] = [
   {
     version: "2.4.0",
     date: "2026-05-14",
-    title: "Documentation density pass",
+    title: "Content density and readiness polish",
     summary:
-      "Expanded the content model and documentation catalog to make the portal look and read like a production docs product.",
-    badges: ["Added", "Improved", "Changed"],
+      "Refined docs content tone, tightened navigation consistency, and hardened copy-to-clipboard behavior for production use.",
+    badges: ["Improved", "Fixed", "Changed"],
     bullets: [
-      "Expanded docs catalog to 24 articles with richer metadata, tags, outcomes, prerequisites, and related links.",
-      "Upgraded home, docs catalog, article, and changelog pages with denser product-style blocks and release confidence context.",
-      "Added architecture and resources pages, then linked them across footer and sitemap for discoverability.",
-      "Improved docs article UX with breadcrumbs, callouts, related guides, and stronger on-page navigation.",
+      "Reviewed all 24 articles to remove template-like phrasing and keep summaries, sections, and tags specific to real workflows.",
+      "Aligned supporting pages and discovery paths across header/footer/sitemap so architecture, resources, and status are easy to find.",
+      "Hardened code-block copy actions with fallback behavior and failure state without breaking UI when Clipboard API is unavailable.",
+      "Updated project docs and smoke-check guidance to match the live domain and PM2 runtime commands.",
     ],
   },
   {

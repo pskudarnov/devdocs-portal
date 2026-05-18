@@ -1,8 +1,8 @@
 export const siteConfig = {
-  name: "DevDocs",
-  title: "DevDocs Premium",
+  name: "DevDocs Portal",
+  title: "DevDocs Portal",
   description:
-    "A premium developer documentation portal with precision engineering and a production-ready interface.",
+    "Production-ready developer documentation portal focused on practical implementation guidance.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://devdocs.pavel-skudarnov.ru",
   repositoryUrl: "https://github.com/pskudarnov/devdocs-portal",
   email: "mailto:pavel.skudarnov@yandex.ru",

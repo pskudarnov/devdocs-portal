@@ -82,7 +82,7 @@ export function Footer() {
           </div>
         </div>
         <div className="border-t border-outline-variant/10 pt-6 text-xs text-on-surface-variant">
-          © {currentYear} DevDocs Premium. Built as a portfolio-grade documentation product.
+          © {currentYear} DevDocs Portal. Built as a production-style documentation product.
         </div>
       </div>
     </footer>
